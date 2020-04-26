@@ -6,13 +6,16 @@ plugins {
 
 group = 'com.YouTuMP3'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '14'
+sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
 }
 
+
 dependencies {
+	implementation 'org.springframework:spring-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
