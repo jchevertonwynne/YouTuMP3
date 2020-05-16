@@ -2,6 +2,7 @@ package com.YouTuMP3.YouTuMP3;
 
 import com.YouTuMP3.YouTuMP3.beans.input.VideoURL;
 import com.YouTuMP3.YouTuMP3.beans.output.RawVideoURL;
+import com.YouTuMP3.YouTuMP3.errors.InvalidYouTubeURLException;
 import com.YouTuMP3.YouTuMP3.models.AudioRecord;
 import com.YouTuMP3.YouTuMP3.models.AudioRecordRepository;
 import com.YouTuMP3.YouTuMP3.models.AudioStatus;
@@ -49,7 +50,7 @@ public class YouTuMP3Controller {
         Matcher matcher = pattern.matcher(videoURL.getUrl());
 
         if (!matcher.find()) {
-            return new RawVideoURL("fail");
+            throw new IllegalArgumentException();
         }
 
         String videoId = matcher.group();
@@ -58,17 +59,13 @@ public class YouTuMP3Controller {
         try {
             YoutubeVideo video = downloader.getVideo(videoId);
             List<AudioFormat> audioFormats = video.audioFormats();
-
-            Optional<AudioFormat> optionalAudioFormat = audioFormats.stream()
-                    .max(audioFormatComparator);
+            Optional<AudioFormat> optionalAudioFormat = audioFormats.stream().max(audioFormatComparator);
 
             if (optionalAudioFormat.isEmpty()) {
-                return new RawVideoURL("fail");
+                throw new IllegalArgumentException();
             }
 
             AudioFormat audioFormat = optionalAudioFormat.get();
-
-            //initialise record
             AudioRecord record = new AudioRecord();
             record.setStatus(AudioStatus.IN_PROGRESS);
             record.setYoutubeURl(videoURL.getUrl());
@@ -83,11 +80,11 @@ public class YouTuMP3Controller {
             return new RawVideoURL(audioFormat.url());
         }
         catch (YoutubeException e) {
-            System.out.println("lmao");
-        }
-        catch (IOException e) {
             System.out.println("yolo");
         }
-        return new RawVideoURL("this didn't work idiot");
+        catch (IOException e) {
+            System.out.println("lmao");
+        }
+        throw new IllegalArgumentException();
     }
 }

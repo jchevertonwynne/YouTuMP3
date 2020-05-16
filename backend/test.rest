@@ -2,7 +2,7 @@ POST http://localhost:8080/video HTTP/1.1
 content-type: application/json
 
 {
-    "url": "https://www.youtube.com/watch?v=yEG2VTHS9yg"
+    "url": "https://dzone.com/articles/autowiring-spring-beans-into-=classes-not-managed-by-spring"
 }
 
 ###
