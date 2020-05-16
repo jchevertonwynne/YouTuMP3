@@ -1,4 +1,4 @@
-package com.YouTuMP3.YouTuMP3.beans;
+package com.YouTuMP3.YouTuMP3.beans.input;
 
 public class NewDefault {
     private String newDefault;

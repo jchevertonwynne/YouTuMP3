@@ -1,4 +1,4 @@
-package com.YouTuMP3.YouTuMP3.beans;
+package com.YouTuMP3.YouTuMP3.beans.output;
 
 public class Count {
     private int timesCalled;
