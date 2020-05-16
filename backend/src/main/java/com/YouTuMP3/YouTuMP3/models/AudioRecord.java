@@ -1,7 +1,5 @@
 package com.YouTuMP3.YouTuMP3.models;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,9 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "youtube_audio")
+@Table(name="youtube_audio")
 public class AudioRecord implements Serializable {
 
     private static final long serialVersionUID = -2343243243242432341L;
@@ -23,7 +22,7 @@ public class AudioRecord implements Serializable {
     @Column(name="youtubeurl", nullable=false)
     private String youtubeURl;
 
-    @Column(name="audiourl", nullable=true)
+    @Column(name="audiourl")
     private String audioURL;
 
     @Column(name="status", nullable=false)
