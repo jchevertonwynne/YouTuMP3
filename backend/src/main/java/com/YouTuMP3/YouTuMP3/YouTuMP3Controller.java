@@ -33,10 +33,12 @@ public class YouTuMP3Controller {
         return Integer.compare(a.itag().id(), b.itag().id());
     };
 
-    AudioRecordRepository audioRecordRepository;
+    private AudioRecordRepository audioRecordRepository;
+    private YouTubeDownloaderComponent youTubeDownloaderComponent;
 
-    public YouTuMP3Controller(AudioRecordRepository audioRecordRepository) {
+    public YouTuMP3Controller(AudioRecordRepository audioRecordRepository, YouTubeDownloaderComponent youTubeDownloaderComponent) {
         this.audioRecordRepository = audioRecordRepository;
+        this.youTubeDownloaderComponent = youTubeDownloaderComponent;
     }
 
     @GetMapping(path="/findall")
@@ -55,9 +57,8 @@ public class YouTuMP3Controller {
 
         String videoId = matcher.group();
 
-        YoutubeDownloader downloader = new YoutubeDownloader();
         try {
-            YoutubeVideo video = downloader.getVideo(videoId);
+            YoutubeVideo video = youTubeDownloaderComponent.getVideo(videoId);
             List<AudioFormat> audioFormats = video.audioFormats();
             Optional<AudioFormat> optionalAudioFormat = audioFormats.stream().max(audioFormatComparator);
 

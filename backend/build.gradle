@@ -26,14 +26,15 @@ dependencies {
 
 	implementation 'org.springframework:spring-webmvc'
 
+	testCompile 'org.mockito:mockito-core:3.3.3'
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.7.0-M1'
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
+	testCompile group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.7.0-M1'
+	testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0-M1'
+	testCompile group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.7.0-M1'
 
-
-
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
 }
 
 test {
-	useJUnitPlatform()
+	useJUnitPlatform ()
 }
